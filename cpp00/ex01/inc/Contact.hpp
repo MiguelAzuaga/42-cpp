@@ -1,5 +1,5 @@
-#ifndef contact_HPP
-# define contact_HPP
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
 
 # include <string>
 
@@ -30,4 +30,4 @@ class Contact
 		const std::string &getDarkestSecret() const;
 };
 
-#endif // contact_HPP
+#endif // CONTACT_HPP

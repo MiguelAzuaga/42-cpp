@@ -7,7 +7,7 @@ static bool isAlphanumerical(const std::string &str)
 {
 	for (size_t i = 0; i < str.length(); i++)
 	{
-		if (!std::isalnum(str[i]) && !std::isspace(str[i]) && str[i] != '_')
+		if (!std::isalnum(str[i]) && str[i] != ' ' && str[i] != '_')
 			return false;
 	}
 	return true;
@@ -20,7 +20,14 @@ static std::string prompt(const std::string &label)
 	while (true)
 	{
 		std::cout << label;
+		
 		std::getline(std::cin, input);
+
+		if (std::cin.eof())
+		{
+			std::cout << std::endl;
+			std::exit(0);
+		}
 
 		if (input.empty())
 		{
@@ -110,8 +117,12 @@ int main()
 	while (true)
 	{
 		std::cout << "Command (ADD, SEARCH, EXIT): ";
-		if (!std::getline(std::cin, command))
-			break;
+		std::getline(std::cin, command);
+		if (std::cin.eof())
+		{
+			std::cout << std::endl;
+			std::exit(0);
+		}
 
 		if (command == "ADD")
 		{

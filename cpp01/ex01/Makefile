@@ -9,7 +9,7 @@ SHELL	:= bash
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME			= Moar brainz!
+NAME			= MoarBrainz
 
 ###	Message Vars
 _NAME			= [$(MAG)cpp$(D)]
@@ -27,6 +27,8 @@ TEMP_PATH		= .temp
 
 ### Files Source
 FILES += main.cpp
+FILES += Zombie.cpp
+FILES += zombieHorde.cpp
 
 ### Paths
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))

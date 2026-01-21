@@ -9,7 +9,7 @@ SHELL	:= bash
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME			=
+NAME			= UnnecessaryViolence
 
 ###	Message Vars
 _NAME			= [$(MAG)cpp$(D)]
@@ -27,6 +27,9 @@ TEMP_PATH		= .temp
 
 ### Files Source
 FILES += main.cpp
+FILES += HumanA.cpp
+FILES += HumanB.cpp
+FILES += Weapon.cpp
 
 ### Paths
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))

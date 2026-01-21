@@ -9,7 +9,7 @@ SHELL	:= bash
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME			=
+NAME			= brain
 
 ###	Message Vars
 _NAME			= [$(MAG)cpp$(D)]

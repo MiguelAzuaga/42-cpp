@@ -10,33 +10,51 @@ int main(int argc, char **argv)
 		std::cerr << USAGE << std::endl;
 		return 1;
 	}
+	if (!argv[1] || std::string(argv[1]).empty())
+	{
+		std::cerr << "Error: filename cannot be empty" << std::endl;
+		return 1;
+	}
+	if (!argv[2] || std::string(argv[2]).empty())
+	{
+		std::cerr << "Error: s1 cannot be empty" << std::endl;
+		return 1;
+	}
 	std::string filename = argv[1];
 	std::string s1 = argv[2];
 	std::string s2 = argv[3];
-	std::ifstream	file;
-	std::string		line;
-	file.open(argv[1]);
-	if (!file.is_open())
-	{
-		std::cout << "File not found" << std::endl;
-		return (1);
-	}
-	std::string		file_name = (std::string)argv[1] + ".replace";
-	std::ofstream	rep(file_name.c_str());
-	size_t	pos;
-	while(std::getline(file, line))
-	{
-		pos = 0;
-   		while ((pos = line.find(argv[2], pos)) != std::string::npos)
-		{
-			line.erase(pos, ((std::string)argv[2]).length());
-			line.insert(pos, (std::string)argv[3]);
-			pos += ((std::string)argv[3]).length();
 
-		}
-		if (!std::cin.eof())
-			rep << line << std::endl;
+	// Create I/O streams and verify if they work.
+	std::ifstream infile(filename.c_str(), std::ios::in);
+	if (!infile.is_open())
+	{
+		std::cerr << "File failed to open:" << filename << std::endl;
+		return 1;
 	}
-	rep.close();
-	file.close();
+	std::string fileReplace(filename.append(".replace"));
+
+	std::ofstream outfile(fileReplace.c_str(), std::ios::out);
+	if (!outfile.is_open())
+	{
+		std::cerr << "File failed to open:" << filename.append(".replace") << std::endl;
+		return 1;
+	}
+
+	std::string line;
+	while (std::getline(infile, line))
+	{
+		size_t pos = 0;
+		// Changes s1 for s2 while pos != -1
+		while ((pos = line.find(s1, pos)) != std::string::npos)
+		{
+			line.erase(pos, s1.length());
+			line.insert(pos, s2);
+
+			pos += s2.length();
+		}
+		outfile << line << std::endl;
+	}
+	infile.close();
+	outfile.close();
+	return 0;
 }

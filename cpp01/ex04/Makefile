@@ -9,7 +9,7 @@ SHELL	:= bash
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME			=
+NAME			= replace
 
 ###	Message Vars
 _NAME			= [$(MAG)cpp$(D)]

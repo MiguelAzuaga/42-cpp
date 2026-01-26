@@ -9,7 +9,7 @@ SHELL	:= bash
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME			= UnnecessaryViolence
+NAME			= unnecessaryViolence
 
 ###	Message Vars
 _NAME			= [$(MAG)cpp$(D)]

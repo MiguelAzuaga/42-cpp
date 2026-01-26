@@ -9,7 +9,7 @@ SHELL	:= bash
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME			= MoarBrainz
+NAME			= moarBrainz
 
 ###	Message Vars
 _NAME			= [$(MAG)cpp$(D)]

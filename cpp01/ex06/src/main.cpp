@@ -2,6 +2,24 @@
 #include <iostream>
 #include <string>
 
+enum Level {
+	DEBUG,
+	INFO,
+	WARNING,
+	ERROR,
+	UNKNOWN
+};
+
+Level getLevel(const std::string& level) {
+	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+
+	for (int i = 0; i < 4; i++) {
+		if (level == levels[i])
+			return static_cast<Level>(i);
+	}
+	return UNKNOWN;
+}
+
 int main(int argc, char **argv) {
 	if (argc != 2) {
 		std::cout << "Usage: ./harlFilter <LEVEL>" << std::endl;
@@ -11,30 +29,17 @@ int main(int argc, char **argv) {
 	std::string level = argv[1];
 	Harl harl;
 
-	int lvl;
-
-	if (level == "DEBUG")
-		lvl = 0;
-	else if (level == "INFO")
-		lvl = 1;
-	else if (level == "WARNING")
-		lvl = 2;
-	else if (level == "ERROR")
-		lvl = 3;
-	else
-		lvl = -1;
-
-	switch (lvl) {
-		case 0:  // DEBUG
+	switch (getLevel(level)) {
+		case DEBUG:
 			harl.complain("DEBUG");
-		case 1:  // INFO
+		case INFO:
 			harl.complain("INFO");
-		case 2:  // WARNING
+		case WARNING:
 			harl.complain("WARNING");
-		case 3:  // ERROR
+		case ERROR:
 			harl.complain("ERROR");
 			break;
-		default:
+		case UNKNOWN:
 			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 			std::cout << "Although there are several ways to deal with Harl, one of the most effective is to SWITCH it off." << std::endl;
 	}

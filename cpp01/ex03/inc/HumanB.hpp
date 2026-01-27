@@ -6,15 +6,16 @@
 
 class HumanB
 {
-	private:
-		std::string _name;
-		Weapon* _weapon;
+private:
+	std::string _name;
+	Weapon* _weapon;
 
-	public:
-		HumanB(const std::string& name);
-		~HumanB();
-		void attack();
-		void setWeapon(Weapon& newWeapon);
+public:
+	HumanB(const std::string& name);
+	~HumanB();
+
+	void attack();
+	void setWeapon(Weapon& newWeapon);
 };
 
 #endif // HUMANB_HPP

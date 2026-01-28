@@ -1,22 +1,10 @@
 #include "Harl.hpp"
 
 // Constructor
-Harl::Harl()
-{
-	initLevels();
-}
+Harl::Harl() {}
 
 // Destructor
 Harl::~Harl() {}
-
-// Initialize the map
-void Harl::initLevels()
-{
-	levels["DEBUG"] = &Harl::debug;
-	levels["INFO"] = &Harl::info;
-	levels["WARNING"] = &Harl::warning;
-	levels["ERROR"] = &Harl::error;
-}
 
 // Member functions
 void Harl::debug()
@@ -47,17 +35,18 @@ void Harl::error()
 			  << std::endl;
 }
 
-// Complain function using map
+// Complain function using array
 void Harl::complain(const std::string& level)
 {
-	std::map<std::string, harlMemFn>::iterator it = levels.find(level);
-	if (it != levels.end())
+	const std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	harlMemFn functions[4] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+
+	for (int i = 0; i < 4; i++)
 	{
-		harlMemFn func = it->second;
-		(this->*func)();
-	}
-	else
-	{
-		std::cout << "[" << level << "] This level does not exist!" << std::endl;
+		if (level == levels[i])
+		{
+			(this->*functions[i])();
+			return;
+		}
 	}
 }

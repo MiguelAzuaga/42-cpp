@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <string>
-#include <map>
 
 #define RESET	"\033[0m"
 #define PURPLE	"\033[0;35m"
@@ -26,9 +25,6 @@ public:
 
 private:
 	typedef void (Harl::*harlMemFn)(void);
-	std::map<std::string, harlMemFn> levels;
-
-	void initLevels();
 };
 
 #endif // HARL_HPP

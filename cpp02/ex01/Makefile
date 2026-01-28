@@ -9,7 +9,7 @@ SHELL	:= bash
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME			=
+NAME			= fixed
 
 ###	Message Vars
 _NAME			= [$(MAG)cpp$(D)]
@@ -26,6 +26,7 @@ BUILD_PATH		= .build
 TEMP_PATH		= .temp
 
 ### Files Source
+FILES += Fixed.cpp
 FILES += main.cpp
 
 ### Paths

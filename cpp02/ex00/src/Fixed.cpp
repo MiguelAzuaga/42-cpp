@@ -27,7 +27,6 @@ Fixed::~Fixed()
 	std::cout << "Destructor called" << std::endl;
 }
 
-
 /// Getters & Setters
 int Fixed::getRawBits() const
 {

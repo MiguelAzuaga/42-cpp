@@ -21,6 +21,6 @@ public:
 	int		getRawBits( void ) const;
 	void	setRawBits( int const raw );
 };
-std::ostream& operator<<(std::ostream& out, Fixed const& in);
+std::ostream& operator<<(std::ostream& out, const Fixed& in);
 
 #endif // FIXED_HPP

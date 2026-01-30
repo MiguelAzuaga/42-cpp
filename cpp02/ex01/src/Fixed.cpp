@@ -24,7 +24,7 @@ Fixed::Fixed(const float value): _rawBits(static_cast<int>(roundf(value * (1 << 
 	std::cout << "Float constructor called" << std::endl;
 }
 
-Fixed& Fixed::operator=(Fixed const& other)
+Fixed& Fixed::operator=(const Fixed& other)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other)
@@ -61,8 +61,8 @@ void Fixed::setRawBits(int const raw)
 }
 
 
-std::ostream& operator<<(std::ostream& out, Fixed const& in)
+std::ostream& operator<<(std::ostream& out, const Fixed& value)
 {
-	out << in.toFloat();
+	out << value.toFloat();
 	return out;
 }

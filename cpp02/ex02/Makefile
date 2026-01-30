@@ -26,6 +26,7 @@ BUILD_PATH		= .build
 TEMP_PATH		= .temp
 
 ### Files Source
+FILES += Fixed.cpp
 FILES += main.cpp
 
 ### Paths

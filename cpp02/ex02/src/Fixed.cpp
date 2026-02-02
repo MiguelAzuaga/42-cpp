@@ -73,15 +73,21 @@ Fixed Fixed::operator-(const Fixed& other) const
 
 Fixed Fixed::operator*(const Fixed& other) const
 {
+	long long tmp = static_cast<long long>(this->_rawBits) * static_cast<long long>(other._rawBits);
 	Fixed result;
-	result._rawBits = (this->_rawBits * other._rawBits) >> _fractBits;
+	result.setRawBits(tmp >> _fractBits);
 	return result;
 }
 
 Fixed Fixed::operator/(const Fixed& other) const
 {
+	if (other._rawBits == 0)
+	{
+		throw std::runtime_error("Division by zero");
+	}
 	Fixed result;
-	result._rawBits = (this->_rawBits << _fractBits) / other._rawBits;
+	long long tmp = static_cast<long long>(this->_rawBits) << _fractBits;
+	result.setRawBits(static_cast<int>(tmp / other._rawBits));
 	return result;
 }
 

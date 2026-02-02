@@ -27,6 +27,7 @@ TEMP_PATH		= .temp
 
 ### Files Source
 FILES += Fixed.cpp
+FILES += tester.cpp
 FILES += main.cpp
 
 ### Paths

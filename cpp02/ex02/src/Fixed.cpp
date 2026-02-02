@@ -161,16 +161,16 @@ Fixed& Fixed::max(Fixed& a, Fixed& b)
 
 const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
 {
-    if (a <= b)
-        return a;
-    return b;
+	if (a <= b)
+		return a;
+	return b;
 }
 
 const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
 {
-    if (a >= b)
-        return a;
-    return b;
+	if (a >= b)
+		return a;
+	return b;
 }
 
 std::ostream& operator<<(std::ostream& out, const Fixed& value)

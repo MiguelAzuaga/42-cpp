@@ -26,7 +26,11 @@ BUILD_PATH		= .build
 TEMP_PATH		= .temp
 
 ### Files Source
+FILES += Point.cpp
+FILES += Fixed.cpp
 FILES += main.cpp
+FILES += isInside.cpp
+
 
 ### Paths
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))

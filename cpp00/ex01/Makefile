@@ -26,9 +26,9 @@ BUILD_PATH		= .build
 TEMP_PATH		= .temp
 
 ### Files Source
-FILES	+= main.cpp
 FILES	+= Contact.cpp
 FILES	+= PhoneBook.cpp
+FILES	+= main.cpp
 
 ### Paths
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))
@@ -41,6 +41,7 @@ OBJS	= $(addprefix $(BUILD_PATH)/, $(FILES:.cpp=.o))
 CPP				= c++
 CPPFLAGS		= -std=c++98 -Iinc
 CFLAGS			= -Wall -Wextra -Werror -g
+VALFLAGS		=
 
 #==============================================================================#
 #                                COMMANDS                                      #
@@ -75,8 +76,8 @@ $(TEMP_PATH):
 	@$(MKDIR_P) $(TEMP_PATH)
 	@echo "* $(YEL)Creating $(CYA)$(TEMP_PATH)$(YEL) folder:$(D) $(_SUCCESS)"
 
-valgrind: all $(NAME) $(TEMP_PATH)
-	"valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME) $(ARG)"
+valgrind: $(NAME)
+	valgrind $(VALFLAGS) ./$(NAME)
 
 clean:
 	@echo "*** $(YEL)Removing$(D) deps $(YEL)object files$(D)"
@@ -104,7 +105,7 @@ fclean: clean
 re: fclean all
 
 
-.PHONY: all clean fclean re valgrind
+.PHONY: all valgrind clean fclean re
 
 #==============================================================================#
 #                                  UTILS                                       #

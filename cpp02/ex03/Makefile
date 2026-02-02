@@ -26,11 +26,10 @@ BUILD_PATH		= .build
 TEMP_PATH		= .temp
 
 ### Files Source
-FILES += Point.cpp
-FILES += Fixed.cpp
-FILES += main.cpp
 FILES += isInside.cpp
-
+FILES += Fixed.cpp
+FILES += Point.cpp
+FILES += main.cpp
 
 ### Paths
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))
@@ -43,6 +42,7 @@ OBJS	= $(addprefix $(BUILD_PATH)/, $(FILES:.cpp=.o))
 CPP				= c++
 CPPFLAGS		= -std=c++98 -Iinc
 CFLAGS			= -Wall -Wextra -Werror -g
+VALFLAGS		=
 
 #==============================================================================#
 #                                COMMANDS                                      #
@@ -77,8 +77,8 @@ $(TEMP_PATH):
 	@$(MKDIR_P) $(TEMP_PATH)
 	@echo "* $(YEL)Creating $(CYA)$(TEMP_PATH)$(YEL) folder:$(D) $(_SUCCESS)"
 
-valgrind: all $(NAME) $(TEMP_PATH)
-	"valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME) $(ARG)"
+valgrind: $(NAME)
+	valgrind $(VALFLAGS) ./$(NAME)
 
 clean:
 	@echo "*** $(YEL)Removing$(D) deps $(YEL)object files$(D)"
@@ -92,7 +92,7 @@ clean:
 			echo "* $(YEL)Removing $(CYA)$(TEMP_PATH)$(D) folder & files:$(D) $(_SUCCESS)"; \
 		fi; \
 	else \
-		echo " $(RED)$(D) [$(GRN)Nothing to clean!$(D)]"; \
+		echo " $(RED)$(D) [$(GRN)Nothing to clean!$(D)]"; \
 	fi
 
 fclean: clean
@@ -100,13 +100,13 @@ fclean: clean
 		$(RM) $(NAME); \
 		echo "* $(YEL)Removing $(CYA)$(NAME)$(D) file: $(_SUCCESS)"; \
 	else \
-		echo " $(RED)$(D) [$(GRN)Nothing to be fcleaned!$(D)]"; \
+		echo " $(RED)$(D) [$(GRN)Nothing to be fcleaned!$(D)]"; \
 	fi
 
 re: fclean all
 
 
-.PHONY: all clean fclean re valgrind
+.PHONY: all valgrind clean fclean re
 
 #==============================================================================#
 #                                  UTILS                                       #

@@ -9,7 +9,7 @@ SHELL	:= bash
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME			=
+NAME			= isInside
 
 ###	Message Vars
 _NAME			= [$(MAG)cpp$(D)]

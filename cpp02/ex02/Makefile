@@ -76,7 +76,7 @@ $(TEMP_PATH):
 	@echo "* $(YEL)Creating $(CYA)$(TEMP_PATH)$(YEL) folder:$(D) $(_SUCCESS)"
 
 valgrind: all $(NAME) $(TEMP_PATH)
-	"valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME) $(ARG)"
+	valgrind $(VAL_ARGS) $(VAL_LEAK) ./$(NAME) $(ARG)
 
 clean:
 	@echo "*** $(YEL)Removing$(D) deps $(YEL)object files$(D)"

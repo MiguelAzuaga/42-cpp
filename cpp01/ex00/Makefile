@@ -9,7 +9,7 @@ SHELL	:= bash
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME			= zombie
+NAME			= braiiiiiiinnnzzzZ
 
 ###	Message Vars
 _NAME			= [$(MAG)cpp$(D)]

@@ -2,10 +2,12 @@
 .temp/
 *.txt*
 
+# cpp00
 megaphone
 phonebook
 account
 
+# cpp01
 braiiiiiiinnnzzzZ
 moarBrainz
 brain
@@ -14,5 +16,9 @@ replace
 harl
 harlFilter
 
+# cpp02
 fixed
 isInside
+
+# cpp03
+claptrap

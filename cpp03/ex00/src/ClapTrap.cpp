@@ -15,7 +15,7 @@ static const char* C_MAG = "\033[35m";
 #define DEF_DMG 0
 
 //> OCF
-ClapTrap::ClapTrap()
+ClapTrap::ClapTrap(void)
 			:_name(std::string(C_GRN) + "ClapTrap" + C_RST),
 			_hitPoints(DEF_HP),
 			_energyPoints(DEF_EP),
@@ -42,7 +42,7 @@ ClapTrap::ClapTrap(const ClapTrap& other)
 	std::cout << "ClapTrap " << this->_name << " has been " << C_YEL << "created!" << C_RST << "(Copy of" + other.getName() + ")" << std::endl;
 }
 
-ClapTrap::~ClapTrap()
+ClapTrap::~ClapTrap(void)
 {
 	std::cout << "ClapTrap " << this->_name << " has been " << C_RED << "destroyed!" << C_RST << std::endl;
 }
@@ -104,22 +104,22 @@ void ClapTrap::beRepaired(unsigned int amount)
 }
 
 //> Getters
-const std::string& ClapTrap::getName() const
+const std::string& ClapTrap::getName(void) const
 {
 	return this->_name;
 }
 
-int ClapTrap::getHitPoints() const
+int ClapTrap::getHitPoints(void) const
 {
 	return this->_hitPoints;
 }
 
-int ClapTrap::getEnergyPoints() const
+int ClapTrap::getEnergyPoints(void) const
 {
 	return this->_energyPoints;
 }
 
-int ClapTrap::getAttackDamage() const
+int ClapTrap::getAttackDamage(void) const
 {
 	return this->_attackDamage;
 }

@@ -9,7 +9,7 @@ SHELL	:= bash
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME			=
+NAME			= scavtrap
 
 ###	Message Vars
 _NAME			= [$(MAG)cpp$(D)]
@@ -26,6 +26,8 @@ BUILD_PATH		= .build
 TEMP_PATH		= .temp
 
 ### Files Source
+FILES += ClapTrap.cpp
+FILES += ScavTrap.cpp
 FILES += main.cpp
 
 ### Paths

@@ -123,3 +123,11 @@ int ClapTrap::getAttackDamage(void) const
 {
 	return this->_attackDamage;
 }
+
+std::ostream& operator<<(std::ostream& out, const ClapTrap& in)
+{
+	out << in.getName() << " HP:" << C_MAG << in.getHitPoints() << C_RST
+		<< " " << " EP:" << C_MAG << in.getEnergyPoints() << C_RST
+		<< " " << " DMG:" << C_MAG << in.getAttackDamage() << C_RST;
+	return out;
+}

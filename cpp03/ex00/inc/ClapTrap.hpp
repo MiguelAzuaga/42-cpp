@@ -17,6 +17,7 @@ public:
 	ClapTrap(void);
 	ClapTrap(const std::string name);
 	ClapTrap(const ClapTrap& other);
+	ClapTrap& operator=(const ClapTrap& other);
 	~ClapTrap(void);
 
 	//>MemFn
@@ -30,5 +31,7 @@ public:
 	int getEnergyPoints(void) const;
 	int getAttackDamage(void) const;
 };
+std::ostream& operator<<(std::ostream& out, const ClapTrap& in);
+
 
 #endif // CLAPTRAP_HPP

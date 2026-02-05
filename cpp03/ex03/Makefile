@@ -9,7 +9,7 @@ SHELL	:= bash
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME			=
+NAME			= diamondtrap
 
 ###	Message Vars
 _NAME			= [$(MAG)cpp$(D)]
@@ -26,6 +26,10 @@ BUILD_PATH		= .build
 TEMP_PATH		= .temp
 
 ### Files Source
+FILES += ClapTrap.cpp
+FILES += ScavTrap.cpp
+FILES += FragTrap.cpp
+FILES += DiamondTrap.cpp
 FILES += main.cpp
 
 ### Paths
@@ -37,7 +41,7 @@ OBJS	= $(addprefix $(BUILD_PATH)/, $(FILES:.cpp=.o))
 #==============================================================================#
 
 CPP				= c++
-CPPFLAGS		= -std=c++98 -Iinc
+CPPFLAGS		= -std=c++98 -Iinc -Wshadow
 CFLAGS			= -Wall -Wextra -Werror -g
 VALFLAGS		=
 

@@ -22,7 +22,7 @@ Cat& Cat::operator=(const Cat& other)
 {
 	if (this != &other)
 	{
-		this->_type = other._type;
+		Animal::operator=(other);
 		std::cout << "Cat assignment operator called" << std::endl;
 	}
 

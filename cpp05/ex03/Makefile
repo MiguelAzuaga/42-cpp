@@ -1,0 +1,167 @@
+#==============================================================================#
+#                                  MAKE CONFIG                                 #
+#==============================================================================#
+
+MAKE	= make -C
+SHELL	:= bash
+
+#==============================================================================#
+#                                     NAMES                                    #
+#==============================================================================#
+
+NAME			=
+TEST_NAME		= test_runner
+
+### Message Vars
+_NAME			= [$(MAG)cpp$(D)]
+_SUCCESS		= [$(GRN)Success!$(D)]
+_INFO			= [$(BLU)INFO$(D)]
+_SEP			= ======================
+
+#==============================================================================#
+#                                    PATHS                                     #
+#==============================================================================#
+
+SRC_PATH		= src
+BUILD_PATH		= .build
+TEMP_PATH		= .temp
+TEST_PATH		= tests
+
+### Files Source
+FILES = main.cpp
+
+FILES +=
+
+### Paths
+SRC		= $(addprefix $(SRC_PATH)/, $(FILES))
+OBJS	= $(addprefix $(BUILD_PATH)/, $(FILES:.cpp=.o))
+
+#==============================================================================#
+#                              COMPILER & FLAGS                                #
+#==============================================================================#
+
+CPP			= c++
+CPPFLAGS	= -std=c++98 -Iinc
+CFLAGS		= -Wall -Wextra -Werror -g
+VALFLAGS	=
+
+### Extra flags (isolated, NOT always active)
+SAN_FLAGS	= -fsanitize=address,undefined -fno-omit-frame-pointer
+COV_FLAGS	= --coverage -O0
+
+#==============================================================================#
+#                                COMMANDS                                      #
+#==============================================================================#
+
+RM		= rm -rf
+MKDIR_P = mkdir -p
+
+#==============================================================================#
+#                                  RULES                                       #
+#==============================================================================#
+
+all: $(BUILD_PATH) $(NAME)
+
+$(NAME): $(BUILD_PATH) $(OBJS)
+	@echo "$(YEL)Compiling $(MAG)$(NAME)$(YEL) mandatory version$(D)"
+	$(CPP) $(CPPFLAGS) $(CFLAGS) $(OBJS) -o $(NAME)
+	@echo "[$(_SUCCESS) compiling $(MAG)$(NAME)$(D) $(YEL):D$(D)]"
+
+-include $(BUILD_PATH)/%.d
+
+$(BUILD_PATH)/%.o: $(SRC_PATH)/%.cpp
+	@echo -n "$(MAG)#$(D) "
+	$(CPP) $(CPPFLAGS) $(CFLAGS) -MMD -MP -c $< -o $@
+
+$(BUILD_PATH):
+	@$(MKDIR_P) $(BUILD_PATH)
+	@echo "* $(YEL)Creating $(CYA)$(BUILD_PATH)$(YEL) folder:$(D) $(_SUCCESS)"
+
+$(TEMP_PATH):
+	@$(MKDIR_P) $(TEMP_PATH)
+	@echo "* $(YEL)Creating $(CYA)$(TEMP_PATH)$(YEL) folder:$(D) $(_SUCCESS)"
+
+#==============================================================================#
+#                                EXTRA TARGETS                                 #
+#==============================================================================#
+
+valgrind: $(NAME)
+	valgrind $(VALFLAGS) ./$(NAME)
+
+### Sanitizers (NO FLAG LEAK)
+sanitize: CFLAGS += $(SAN_FLAGS)
+sanitize: fclean all
+	@echo "$(BLU)Running with sanitizers enabled$(D)"
+	./$(NAME)
+
+### Coverage
+coverage: CFLAGS += $(COV_FLAGS)
+coverage: fclean all
+	@echo "$(BLU)Running coverage$(D)"
+	./$(NAME)
+	gcovr
+
+### Tests (simple assertion-based)
+tests:
+	@echo "$(BLU)Building tests$(D)"
+	$(CPP) $(CPPFLAGS) $(CFLAGS) $(SRC_PATH)/*.cpp $(TEST_PATH)/*.cpp -o $(TEST_NAME)
+	@echo "$(GRN)Running tests$(D)"
+	./$(TEST_NAME)
+
+#==============================================================================#
+#                                   CLEAN                                      #
+#==============================================================================#
+
+clean:
+	@echo "*** $(YEL)Removing$(D) deps $(YEL)object files$(D)"
+	@if [ -d "$(BUILD_PATH)" ] || [ -d "$(TEMP_PATH)" ]; then \
+		if [ -d "$(BUILD_PATH)" ]; then \
+			$(RM) $(BUILD_PATH); \
+			echo "* $(YEL)Removing $(CYA)$(BUILD_PATH)$(D) folder & files$(D): $(_SUCCESS)"; \
+		fi; \
+		if [ -d "$(TEMP_PATH)" ]; then \
+			$(RM) $(TEMP_PATH); \
+			echo "* $(YEL)Removing $(CYA)$(TEMP_PATH)$(D) folder & files:$(D) $(_SUCCESS)"; \
+		fi; \
+	else \
+		echo " [$(GRN)Nothing to clean!$(D)]"; \
+	fi
+	@$(RM) *.gcda *.gcno
+
+fclean: clean
+	@if [ -f "$(NAME)" ]; then \
+		$(RM) $(NAME); \
+		echo "* $(YEL)Removing $(CYA)$(NAME)$(D) file: $(_SUCCESS)"; \
+	else \
+		echo " [$(GRN)Nothing to be fcleaned!$(D)]"; \
+	fi
+	@$(RM) $(TEST_NAME)
+
+re: fclean all
+
+.PHONY: all valgrind sanitize coverage tests clean fclean re
+
+#==============================================================================#
+#                                  UTILS                                       #
+#==============================================================================#
+
+B  		= $(shell tput bold)
+BLA		= $(shell tput setaf 0)
+RED		= $(shell tput setaf 1)
+GRN		= $(shell tput setaf 2)
+YEL		= $(shell tput setaf 3)
+BLU		= $(shell tput setaf 4)
+MAG		= $(shell tput setaf 5)
+CYA		= $(shell tput setaf 6)
+WHI		= $(shell tput setaf 7)
+GRE		= $(shell tput setaf 8)
+BRED 	= $(shell tput setaf 9)
+BGRN	= $(shell tput setaf 10)
+BYEL	= $(shell tput setaf 11)
+BBLU	= $(shell tput setaf 12)
+BMAG	= $(shell tput setaf 13)
+BCYA	= $(shell tput setaf 14)
+BWHI	= $(shell tput setaf 15)
+D 		= $(shell tput sgr0)
+BEL 	= $(shell tput bel)
+CLR 	= $(shell tput el 1)

@@ -64,7 +64,7 @@ $(NAME): $(BUILD_PATH) $(OBJS)
 
 $(BUILD_PATH)/%.o: $(SRC_PATH)/%.cpp
 	@echo -n "$(MAG)#$(D) "
-	$(CPP) $(CPPFLAGS) -MMD -MP -c -g $< -o $@
+	$(CPP) $(CPPFLAGS) $(CFLAGS) -MMD -MP -c -g $< -o $@
 
 $(BUILD_PATH):
 	@$(MKDIR_P) $(BUILD_PATH)

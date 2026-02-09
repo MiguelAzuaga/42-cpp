@@ -39,7 +39,7 @@ OBJS	= $(addprefix $(BUILD_PATH)/, $(FILES:.cpp=.o))
 
 CPP				= c++
 CPPFLAGS		= -std=c++98 -Iinc
-CFLAGS			= -Wall -Wextra -Werror -g
+CFLAGS			= -Wall -Wextra -Werror -Wimplicit-fallthrough -g
 VALFLAGS		=
 
 #==============================================================================#
@@ -65,7 +65,7 @@ $(NAME): $(BUILD_PATH) $(OBJS)
 
 $(BUILD_PATH)/%.o: $(SRC_PATH)/%.cpp
 	@echo -n "$(MAG)#$(D) "
-	$(CPP) $(CPPFLAGS) -MMD -MP -c -g $< -o $@
+	$(CPP) $(CPPFLAGS) $(CFLAGS) -MMD -MP -c -g $< -o $@
 
 $(BUILD_PATH):
 	@$(MKDIR_P) $(BUILD_PATH)

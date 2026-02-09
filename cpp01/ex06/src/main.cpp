@@ -32,12 +32,16 @@ int main(int argc, char **argv) {
 	switch (getLevel(level)) {
 		case DEBUG:
 			harl.complain("DEBUG");
+			/* fall through */
 		case INFO:
 			harl.complain("INFO");
+			/* fall through */
 		case WARNING:
 			harl.complain("WARNING");
+			/* fall through */
 		case ERROR:
 			harl.complain("ERROR");
+			/* fall through */
 			break;
 		case UNKNOWN:
 			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;

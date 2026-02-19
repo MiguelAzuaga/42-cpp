@@ -3,9 +3,12 @@
 
 #include <iostream>
 #include <exception>
+#include "AForm.hpp"
 
 #define MIN_GRADE 150
 #define MAX_GRADE 1
+
+class AForm;
 
 class Bureaucrat
 {
@@ -36,6 +39,8 @@ public:
 	//> Member Functions
 	void incrementGrade();
 	void decrementGrade();
+	void signForm(AForm& form);
+	void executeForm(AForm const & form) const;
 
 	//> Getters
 	const std::string& getName() const;
@@ -43,6 +48,6 @@ public:
 };
 
 //> Stream
-std::ostream& operator<<(std::ostream& out, const Bureaucrat& in);
+std::ostream& operator<<(std::ostream& out, const Bureaucrat in);
 
 #endif // BUREAUCRAT_HPP

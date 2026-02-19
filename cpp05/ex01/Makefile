@@ -9,7 +9,7 @@ SHELL	:= bash
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME			=
+NAME			= maggots
 TEST_NAME		= test_runner
 
 ### Message Vars
@@ -30,7 +30,8 @@ TEST_PATH		= tests
 ### Files Source
 FILES = main.cpp
 
-FILES +=
+FILES += Bureaucrat.cpp
+FILES += Form.cpp
 
 ### Paths
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))

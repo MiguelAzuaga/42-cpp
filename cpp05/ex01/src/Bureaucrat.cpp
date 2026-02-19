@@ -57,6 +57,35 @@ void Bureaucrat::decrementGrade()
 	this->_grade += 1;
 }
 
+void Bureaucrat::signForm(Form& form)
+{
+	if (form.getSigned())
+	{
+		std::cout << "Form "
+				  << form.getName()
+				  << " is already signed"
+				  << std::endl;
+		return;
+	}
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->_name
+				  << " signed form "
+				  << form.getName()
+				  << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << this->_name
+				  << " couldn't sign form "
+				  << form.getName()
+				  << " because "
+				  << e.what()
+				  << std::endl;
+	}
+}
+
 //> Getters
 
 const std::string& Bureaucrat::getName() const { return this->_name; }

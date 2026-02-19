@@ -9,7 +9,7 @@ SHELL	:= bash
 #                                     NAMES                                    #
 #==============================================================================#
 
-NAME			=
+NAME			= forms
 TEST_NAME		= test_runner
 
 ### Message Vars
@@ -30,7 +30,11 @@ TEST_PATH		= tests
 ### Files Source
 FILES = main.cpp
 
-FILES +=
+FILES += Bureaucrat.cpp
+FILES += AForm.cpp
+FILES += PresidentialPardonForm.cpp
+FILES += RobotomyRequestForm.cpp
+FILES += ShrubberyCreationForm.cpp
 
 ### Paths
 SRC		= $(addprefix $(SRC_PATH)/, $(FILES))

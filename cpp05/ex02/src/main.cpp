@@ -8,13 +8,15 @@
 #include "../inc/RobotomyRequestForm.hpp"
 #include "../inc/ShrubberyCreationForm.hpp"
 
-void test_bureaucrat_valid() {
+void test_bureaucrat_valid()
+{
 	Bureaucrat b("Test", 100);
 	assert(b.getName() == "Test");
 	assert(b.getGrade() == 100);
 }
 
-void test_bureaucrat_increment_decrement() {
+void test_bureaucrat_increment_decrement()
+{
 	Bureaucrat b("Test", 100);
 	b.incrementGrade();
 	assert(b.getGrade() == 99);
@@ -22,49 +24,64 @@ void test_bureaucrat_increment_decrement() {
 	assert(b.getGrade() == 100);
 }
 
-void test_bureaucrat_exceptions() {
-	try {
+void test_bureaucrat_exceptions()
+{
+	try
+	{
 		Bureaucrat b("Test", 0);
 		assert(false);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception& e)
+	{
 		assert(std::string(e.what()) == "Grade is too high");
 	}
-	try {
+
+	try
+	{
 		Bureaucrat b("Test", 151);
 		assert(false);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception& e)
+	{
 		assert(std::string(e.what()) == "Grade is too low");
 	}
 }
 
 
-void test_presidential_pardon_form_valid() {
+void test_presidential_pardon_form_valid()
+{
 	PresidentialPardonForm pf("Target");
 	assert(pf.getName() == "PresidentialPardon");
 	assert(pf.getGradeToSign() == 25);
 	assert(pf.getGradeToExecute() == 5);
 }
 
-void test_presidential_pardon_form_exceptions() {
-	try {
+void test_presidential_pardon_form_exceptions()
+{
+	try
+	{
 		PresidentialPardonForm pf("Target");
 		Bureaucrat b("Test", 150);
 		pf.beSigned(b);
 		pf.execute(b);
 		assert(false);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception& e)
+	{
 		assert(std::string(e.what()) == "Grade is too low");
 	}
 }
 
-void test_presidential_pardon_form_be_signed() {
+void test_presidential_pardon_form_be_signed()
+{
 	Bureaucrat b("Test", 5);
 	PresidentialPardonForm pf("Target");
 	pf.beSigned(b);
 	assert(pf.getSigned() == true);
 }
 
-int main() {
+int main()
+{
 	test_bureaucrat_valid();
 	test_bureaucrat_increment_decrement();
 	test_bureaucrat_exceptions();
@@ -81,20 +98,26 @@ int main() {
 	}
 
 	// Bureaucrat: incrementGrade at MAX_GRADE
-	try {
+	try
+	{
 		Bureaucrat b("Test", 1);
 		b.incrementGrade();
 		assert(false);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception& e)
+	{
 		assert(std::string(e.what()) == "Grade is too high");
 	}
 
 	// Bureaucrat: decrementGrade at MIN_GRADE
-	try {
+	try
+	{
 		Bureaucrat b("Test", 150);
 		b.decrementGrade();
 		assert(false);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception& e)
+	{
 		assert(std::string(e.what()) == "Grade is too low");
 	}
 
@@ -102,7 +125,7 @@ int main() {
 	{
 		Bureaucrat b("Signer", 10);
 		PresidentialPardonForm pf("F");
-		pf.beSigned(b);  // sign once
+		pf.beSigned(b);  // sign once (no message input)
 		b.signForm(pf);  // already signed
 		PresidentialPardonForm pf2("F2");
 		b.signForm(pf2);  // should succeed
@@ -123,10 +146,13 @@ int main() {
 	{
 		Bureaucrat exec("Exec", 1);
 		PresidentialPardonForm pf("Target");
-		try {
+		try
+		{
 			pf.execute(exec);
 			assert(false);
-		} catch (const std::exception& e) {
+		}
+		catch (const std::exception& e)
+		{
 			assert(std::string(e.what()) == "The form is not signed.");
 		}
 	}
@@ -138,10 +164,13 @@ int main() {
 		pf.beSigned(exec);
 		exec.executeForm(pf); // should succeed
 		Bureaucrat low("Low", 150);
-		try {
-			low.executeForm(pf); // should throw
+		try
+		{
+			low.executeForm(pf); // should not throw because it is handled inside function
 			// assert(false);
-		} catch (const std::exception& e) {
+		}
+		catch (const std::exception& e)
+		{
 			assert(std::string(e.what()) == "Grade is too low");
 		}
 	}
@@ -150,10 +179,13 @@ int main() {
 	{
 		Bureaucrat exec("Exec", 1);
 		PresidentialPardonForm pf("Target");
-		try {
+		try
+		{
 			pf.execute(exec);
 			assert(false);
-		} catch (const std::exception& e) {
+		}
+		catch (const std::exception& e)
+		{
 			assert(std::string(e.what()) == "The form is not signed.");
 		}
 	}

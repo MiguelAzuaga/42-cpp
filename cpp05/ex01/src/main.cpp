@@ -4,13 +4,15 @@
 #include <cassert>
 #include <sstream>
 
-void test_bureaucrat_valid() {
+void test_bureaucrat_valid()
+{
 	Bureaucrat b("Test", 100);
 	assert(b.getName() == "Test");
 	assert(b.getGrade() == 100);
 }
 
-void test_bureaucrat_increment_decrement() {
+void test_bureaucrat_increment_decrement()
+{
 	Bureaucrat b("Test", 100);
 	b.incrementGrade();
 	assert(b.getGrade() == 99);
@@ -18,51 +20,68 @@ void test_bureaucrat_increment_decrement() {
 	assert(b.getGrade() == 100);
 }
 
-void test_bureaucrat_exceptions() {
-	try {
+void test_bureaucrat_exceptions()
+{
+	try
+	{
 		Bureaucrat b("Test", 0);
 		assert(false);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception& e)
+	{
 		assert(std::string(e.what()) == "Grade is too high");
 	}
-	try {
+	try
+	{
 		Bureaucrat b("Test", 151);
 		assert(false);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception& e)
+	{
 		assert(std::string(e.what()) == "Grade is too low");
 	}
 }
 
-void test_form_valid() {
+void test_form_valid()
+{
 	Form f("Form", 100, 100);
 	assert(f.getName() == "Form");
 	assert(f.getGradeToSign() == 100);
 	assert(f.getGradeToExecute() == 100);
 }
 
-void test_form_exceptions() {
-	try {
+void test_form_exceptions()
+{
+	try
+	{
 		Form f("Form", 0, 100);
 		assert(false);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception& e)
+	{
 		assert(std::string(e.what()) == "Grade is too high");
 	}
-	try {
+	try
+	{
 		Form f("Form", 100, 151);
 		assert(false);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception& e)
+	{
 		assert(std::string(e.what()) == "Grade is too low");
 	}
 }
 
-void test_form_be_signed() {
+void test_form_be_signed()
+{
 	Bureaucrat b("Test", 50);
 	Form f("Form", 100, 100);
 	f.beSigned(b);
 	assert(f.getSigned() == true);
 }
 
-int main() {
+int main()
+{
 	test_bureaucrat_valid();
 	test_bureaucrat_increment_decrement();
 	test_bureaucrat_exceptions();
@@ -79,20 +98,26 @@ int main() {
 	}
 
 	// Bureaucrat: incrementGrade at MAX_GRADE
-	try {
+	try
+	{
 		Bureaucrat b("Test", 1);
 		b.incrementGrade();
 		assert(false);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception& e)
+	{
 		assert(std::string(e.what()) == "Grade is too high");
 	}
 
 	// Bureaucrat: decrementGrade at MIN_GRADE
-	try {
+	try
+	{
 		Bureaucrat b("Test", 150);
 		b.decrementGrade();
 		assert(false);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception& e)
+	{
 		assert(std::string(e.what()) == "Grade is too low");
 	}
 
@@ -131,10 +156,13 @@ int main() {
 		assert(f.getSigned() == true);
 		Bureaucrat low("Low", 100);
 		Form f2("F2", 10, 10);
-		try {
+		try
+		{
 			f2.beSigned(low);
 			assert(false);
-		} catch (const std::exception& e) {
+		}
+		catch (const std::exception& e)
+		{
 			assert(std::string(e.what()) == "Grade is too low");
 		}
 	}
